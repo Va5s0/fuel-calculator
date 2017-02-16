@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import './App.css';
 import TextInput from './Components/TextInput';
 import Output from './Components/Output';
+import Grid from 'react-bootstrap/lib/Grid';
+import Row from 'react-bootstrap/lib/Row';
+import Col from 'react-bootstrap/lib/Col';
 
 class App extends Component {
   constructor(props){
@@ -28,40 +31,46 @@ class App extends Component {
 
   setTotalPrice(){
     let total_price = ((this.state.price_per_lt * this.state.efficiency * this.state.distance) / 100).toFixed(2);
-    let newPrice = (isNaN(total_price) ? this.setState({total_price: "-"},) : this.setState({total_price: total_price},));
+    if (isNaN(total_price) ? this.setState({total_price: "-"},) : this.setState({total_price: total_price},));
   }
 
   render() {
     return (
-      <div className="App">
-        <h1>Fuel Calculator</h1>
-        <form autoComplete="off">
-          <div>
-            <legend><span className="number">1</span> Travel Distance (km)</legend>
-            <div className="distance">
-              <TextInput value={this.state.distance} onChange={this.distanceChange.bind(this)} />
+      <Grid>
+        <Row className="show-grid">
+          <Col xs={12} >
+            <div className="App">
+              <h1>Fuel Calculator</h1>
+              <form autoComplete="off">
+                <div>
+                  <legend><span className="number">1</span> Travel Distance (km)</legend>
+                  <div className="distance">
+                    <TextInput value={this.state.distance} onChange={this.distanceChange.bind(this)} />
+                  </div>
+                </div>
+                <div>
+                  <legend><span className="number">2</span> Fuel Efficiency (lt/100km)</legend>
+                  <div className="efficiency">
+                    <TextInput value={this.state.efficiency} onChange={this.efficiencyChange.bind(this)}/>
+                  </div>
+                </div>
+                <div>
+                  <legend><span className="number">3</span> Price per litre (€/lt)</legend>
+                  <div className="price_per_lt">
+                    <TextInput value={this.state.price_per_lt} onChange={this.pricePerLtChange.bind(this)}/>
+                  </div>
+                </div>
+                <div>
+                  <legend><span className="number">-</span> <strong>Total Cost (€)</strong></legend>
+                  <div className="output">
+                    <Output data={this.state}/>
+                  </div>
+                </div>
+              </form>
             </div>
-          </div>
-          <div>
-            <legend><span className="number">2</span> Fuel Efficiency (lt/100km)</legend>
-            <div className="efficiency">
-              <TextInput value={this.state.efficiency} onChange={this.efficiencyChange.bind(this)}/>
-            </div>
-          </div>
-          <div>
-            <legend><span className="number">3</span> Price per litre (€/lt)</legend>
-            <div className="price_per_lt">
-              <TextInput value={this.state.price_per_lt} onChange={this.pricePerLtChange.bind(this)}/>
-            </div>
-          </div>
-          <div>
-            <legend><span className="number">-</span> <strong>Total Cost (€)</strong></legend>
-            <div className="output">
-              <Output data={this.state}/>
-            </div>
-          </div>
-        </form>
-      </div>
+          </Col>
+        </Row>
+      </Grid>
     );
   }
 }
