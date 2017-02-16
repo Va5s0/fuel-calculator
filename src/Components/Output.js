@@ -6,7 +6,7 @@ class Output extends Component {
     let total_price = this.props.data.total_price;
     return (
       <div className="output">
-        <h3>{total_price} €</h3>
+        <h3>{total_price}</h3>
       </div>
     );
   }

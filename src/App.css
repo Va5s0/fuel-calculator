@@ -3,6 +3,16 @@ h1 {
   font-family: Georgia, "Times New Roman", Times, serif;
 }
 
+#highlight {
+  background-color: #FBE3E4;
+}
+
+.err {
+  color: red;
+  font-size: 12px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
 .output {
     font-family: Georgia, "Times New Roman", Times, serif;
     background: rgba(255,255,255,.1);

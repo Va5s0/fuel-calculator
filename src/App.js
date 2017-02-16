@@ -28,7 +28,7 @@ class App extends Component {
 
   setTotalPrice(){
     let total_price = ((this.state.price_per_lt * this.state.efficiency * this.state.distance) / 100).toFixed(2);
-    this.setState({total_price: total_price},);
+    let newPrice = (isNaN(total_price) ? this.setState({total_price: "-"},) : this.setState({total_price: total_price},));
   }
 
   render() {
@@ -54,7 +54,7 @@ class App extends Component {
               <TextInput value={this.state.price_per_lt} onChange={this.pricePerLtChange.bind(this)}/>
             </div>
           </div>
-
+          
             <legend><span className="number">-</span> <strong>Total Cost (€)</strong></legend>
             <div className="output">
               <Output data={this.state}/>

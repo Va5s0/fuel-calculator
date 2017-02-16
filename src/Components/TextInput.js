@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ErrorMessage from './ErrorMessage';
 
 class TextInput extends Component {
 
@@ -14,6 +15,8 @@ class TextInput extends Component {
     super(props);
     this.state = {
       value: this.props.value,
+      id: "",
+      showResults: false
     }
   }
 
@@ -27,24 +30,38 @@ class TextInput extends Component {
 
   handleBlur(e){
     this.props.onChange(e.target.value);
+    const pattern = /^[0-9]+\.[0-9]+$|^[0-9]+$/;
+    if (!pattern.test(e.target.value)) {
+     this.setState({id: "highlight", showResults: true});
+    }
+    else {
+      this.setState({id: "", showResults: false});
+    }
   }
 
   handleKeyPress(e){
-    const pattern = /^[0-9.,]+$/;
-    if (e.key === 'Enter') {
-        this.props.onChange(e.target.value);
+    if(e.key === 'Enter'){
+      this.props.onChange(e.target.value);
+      const pattern = /^([0-9]*[1-9][0-9]*(\.[0-9]+)?|[0]*\.[0-9]*[1-9][0-9]*)$/;
+      if (!pattern.test(e.target.value)) {
+       e.preventDefault();
+       this.setState({id: "highlight", showResults: true});
       }
-    else if (!pattern.test(e.key)) {
-      e.preventDefault();
+      else {
+        this.setState({id: "", showResults: false});
+      }
     }
   }
 
   render() {
     return (
       <div className="range">
+        { this.state.showResults ? <ErrorMessage /> : null }
         <input
+          id={this.state.id}
           type='text'
           value={this.state.value}
+          format='0.0'
           onChange={this.handleChange.bind(this)}
           onBlur={this.handleBlur.bind(this)}
           onKeyPress={this.handleKeyPress.bind(this)}
