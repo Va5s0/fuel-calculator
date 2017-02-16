@@ -54,11 +54,12 @@ class App extends Component {
               <TextInput value={this.state.price_per_lt} onChange={this.pricePerLtChange.bind(this)}/>
             </div>
           </div>
-          
+          <div>
             <legend><span className="number">-</span> <strong>Total Cost (€)</strong></legend>
             <div className="output">
               <Output data={this.state}/>
             </div>
+          </div>
         </form>
       </div>
     );
