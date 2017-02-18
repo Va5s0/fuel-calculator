@@ -56,7 +56,7 @@ class TextInput extends Component {
   render() {
     return (
       <div className="range">
-        { this.state.showResults ? <ErrorMessage /> : null }
+        { this.state.showResults ? <div className="err" >*Invalid input</div> : null }
         <input
           id={this.state.id}
           type='text'
