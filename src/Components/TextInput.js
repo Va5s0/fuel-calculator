@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ErrorMessage from './ErrorMessage';
 
 class TextInput extends Component {
 
